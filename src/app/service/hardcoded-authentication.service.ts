@@ -19,8 +19,8 @@ authenticate(username, password){
 }
 
 isUserLoggedIn(){
- let user = sessionStorage.getItem('authenticatedUser');
- return !(user === null);
+  const user = sessionStorage.getItem('authenticatedUser');
+  return !(user === null);
 }
 
 logout(){

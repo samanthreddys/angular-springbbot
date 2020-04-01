@@ -22,7 +22,7 @@ export class ListTodosComponent implements OnInit {
     new Todo(1, 'Vacation', false, new Date()),
     new Todo(2, 'Wedding', false, new Date()),
     new Todo(3, 'Travel Destination', false, new Date())
-  ]
+  ];
 
 
   constructor() { }

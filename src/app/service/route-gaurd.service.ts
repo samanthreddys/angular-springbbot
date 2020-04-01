@@ -12,7 +12,7 @@ export class RouteGuardService implements CanActivate {
     ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if(this.hardcodedAuthenticationService.isUserLoggedIn()){
+    if (this.hardcodedAuthenticationService.isUserLoggedIn()){
       return true;
     }
 

@@ -16,8 +16,8 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
 
     console.log(this.message);
-    this.name = this.route.snapshot.params['name'];
-    //console.log(this.route.snapshot.params['name']);
+    this.name = this.route.snapshot.params.name;
+    // console.log(this.route.snapshot.params['name']);
 
   }
 
