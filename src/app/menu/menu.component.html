@@ -3,7 +3,7 @@
         <div> <a href ="http://localhost:4200" class="navbar-brand" >ColorPix</a></div>
         <ul class="navbar-nav">
             <li>
-                <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" outerLink="/welcome/admin" class="nav-link">Home</a>
+                <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" routerLink="/welcome/admin" class="nav-link">Home</a>
             </li>
             <li>
                 <a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" routerLink="/todos" class="nav-link">Todos</a>
