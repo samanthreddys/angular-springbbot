@@ -23,7 +23,7 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params.id;
     this.todo = new Todo(this.id, '', false, new Date());
-    if (this.id != -1){
+    if (this.id !== -1){
     this.todoservice.retrieveTodoById('admin', this.id)
     .subscribe(
       data => this.todo = data
@@ -33,7 +33,7 @@ export class TodoComponent implements OnInit {
 
   saveTodoById(){
 
-    if (this.id == -1  ){
+    if (this.id === -1  ){
       this.todoservice.addTodoById('admin', this.todo).subscribe(
         data => {
           console.log(data);
@@ -50,7 +50,6 @@ export class TodoComponent implements OnInit {
       error => error.error.message
     );
     }
-  
   }
 
 }

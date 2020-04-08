@@ -17,11 +17,11 @@ export class TodoDataService {
     return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
   }
 
-  deleteTodo(username,id){
+  deleteTodo(username, id){
     return this.http.delete(`http://localhost:8080/users/${username}/todos/${id}`);
   }
 
-    retrieveTodoById(username,id){
+    retrieveTodoById(username, id){
     return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`);
   }
   saveTodoById(username, id, todo){
