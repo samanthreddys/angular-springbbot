@@ -14,44 +14,59 @@ export class BasicAuthenticationService {
   ) { }
 
 
-isUserLoggedIn(){
-  const user = sessionStorage.getItem('authenticatedUser');
-  return !(user === null);
-}
-
-getAuthenticatedToken(){
-  if (this.getAuthenticatedUser()) {
-  return sessionStorage.getItem('token');
+  isUserLoggedIn() {
+    const user = sessionStorage.getItem('authenticatedUser');
+    return !(user === null);
   }
 
-}
-getAuthenticatedUser(){
-  return sessionStorage.getItem('authenticatedUser');
-}
+  getAuthenticatedToken() {
+    if (this.getAuthenticatedUser()) {
+      return sessionStorage.getItem('token');
+    }
 
-logout(){
-  sessionStorage.removeItem('authenticatedUser');
-  sessionStorage.removeItem('token');
-}
+  }
+  getAuthenticatedUser() {
+    return sessionStorage.getItem('authenticatedUser');
+  }
 
-// Basic Auth Service
-  executeBasicAuthService(username, password){
+  logout() {
+    sessionStorage.removeItem('authenticatedUser');
+    sessionStorage.removeItem('token');
+  }
+
+  // Basic Auth Service
+  executeBasicAuthService(username, password) {
     const basicAuthHeaderString = this.createBasicAuthHeader(username, password);
     const headers = new HttpHeaders({
       Authorization: basicAuthHeaderString,
       'Access-Control-Allow-Origin': '*'
     });
-    return this.http.get<BasicAuthBean>(`${API_URL}/basicauth`, {headers})
-                .pipe(
-                  map(data => {
-                    sessionStorage.setItem('authenticatedUser', username);
-                    sessionStorage.setItem('token', basicAuthHeaderString);
-                    return data;
-                  }));
+    return this.http.get<BasicAuthBean>(`${API_URL}/basicauth`, { headers })
+      .pipe(
+        map(data => {
+          sessionStorage.setItem('authenticatedUser', username);
+          sessionStorage.setItem('token', basicAuthHeaderString);
+          return data;
+        }));
+  }
+
+  // JWT Auth Service
+  executeJWTAuthService(username, password) {
+
+    return this.http.post<any>(`${API_URL}/authenticate`, {
+      username,
+      password
+    })
+      .pipe(
+        map(data => {
+          sessionStorage.setItem('authenticatedUser', username);
+          sessionStorage.setItem('token', `Bearer ${data.token}`);
+          return data;
+        }));
   }
 
   // Encode the header message .
-  createBasicAuthHeader(username, password){
+  createBasicAuthHeader(username, password) {
     const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
     console.log('basic Auth Header: ', basicAuthHeaderString);
     return basicAuthHeaderString;
@@ -59,7 +74,7 @@ logout(){
 
 }
 
-export class BasicAuthBean{
+export class BasicAuthBean {
 
   constructor(
     public message: string

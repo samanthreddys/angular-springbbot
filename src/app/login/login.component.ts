@@ -18,27 +18,44 @@ export class LoginComponent implements OnInit {
   // Dependency Injection
 
   constructor(private router: Router,
-              private basicAuthService: BasicAuthenticationService,
-              private hardCodedAuthenticationService: HardcodedAuthenticationService
+    private basicAuthService: BasicAuthenticationService,
+    private hardCodedAuthenticationService: HardcodedAuthenticationService
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
 
-    handleBasicAuthLogin() {
+  // Handle Basic authentication
+  handleBasicAuthLogin() {
 
     this.basicAuthService.executeBasicAuthService(this.username, this.password)
-        .subscribe(
-          data => {
-            console.log(data);
-            this.router.navigate(['welcome', this.username]);
+      .subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['welcome', this.username]);
         },
         error => {
           console.log('Invalid Login');
           this.invalidLogin = true;
         }
-        );
+      );
+
+  }
+  // Handle JWT authentication
+  handleJWTAuthLogin() {
+
+    this.basicAuthService.executeJWTAuthService(this.username, this.password)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['welcome', this.username]);
+        },
+        error => {
+          console.log('Invalid Login');
+          this.invalidLogin = true;
+        }
+      );
 
   }
 
