@@ -3,7 +3,7 @@
     <div class= "alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter Valid Values</div>
     <div class= "alert alert-warning" *ngIf="todoDescription.dirty && todoDescription.invalid">Enter Valid Description</div>
     <div class= "alert alert-warning" *ngIf="todoTargetDate.dirty && todoTargetDate.invalid">Enter Valid Target Date</div>
-    <form (ngSubmit) = "!todoForm.invalid && saveTodoById()" #todoForm="ngForm">
+   <form (ngSubmit) = "!todoForm.invalid && saveTodoById()" #todoForm="ngForm">
 
     
     <fieldset class = "form-group">
